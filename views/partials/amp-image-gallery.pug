@@ -1,0 +1,8 @@
+amp-carousel#carousel-with-carousel-preview(width='400' height='300' layout='responsive' type='slides')
+  each galleryItem in slice.items
+    amp-img(src=galleryItem.image.url width='400' height='300' layout='responsive' alt='a sample image')
+ 
+amp-carousel.carousel-preview(width='auto' height='48' layout='fixed-height' type='carousel')
+  each galleryItem in slice.items
+    button(on='tap:carousel-with-carousel-preview.goToSlide(index=0)')
+      amp-img(src=galleryItem.image.url width='60' height='40' layout='responsive' alt='a sample image')

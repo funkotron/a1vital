@@ -1,0 +1,18 @@
+for banner in pageContent.data.banner
+  section.page-header.page-header-text-light.overlay.overlay-color-dark.overlay-show.overlay-op-2(data-plugin-image-background='' data-plugin-options="{'imageUrl': "+banner.image.url+"}" style='background-image: url('+banner.image.url+'); background-size: cover; background-position: center center; background-repeat: no-repeat;')
+    .container.d-flex.flex-column
+      .row.align-items-center.position-relative.min-height-370.z-index-10
+        .col-md-12
+          //- .row
+          //-   .col-md-12.appear-animation.animated.fadeInRightShorter.appear-animation-visible(data-appear-animation='fadeInRightShorter' data-appear-animation-delay='100' style='animation-delay: 100ms;')
+          //-     ul.breadcrumb.justify-content-start
+          //-       li
+          //-         a(href='#') Home
+          //-       li.active Features
+          .row.text-center
+            .col-md-12.appear-animation.animated.fadeInRightShorter.appear-animation-visible(data-appear-animation='fadeInRightShorter' data-appear-animation-delay='200' style='animation-delay: 200ms;')
+              h1
+                != Txt.asText(banner.title)
+              p.lead
+                != Txt.asText(banner.tagline)
+

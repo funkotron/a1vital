@@ -1,0 +1,14 @@
+section.highlight.content-section
+  .highlight-left
+    != Txt.asHtml(slice.primary.title, ctx.linkResolver)
+    != Txt.asHtml(slice.primary.headline, ctx.linkResolver)
+
+    - var highlightLink = Link.url(slice.primary.link, ctx.linkResolver)
+    - var linkLabel = Txt.asText(slice.primary.link_label)
+    if ( highlightLink && linkLabel != " " )
+      p
+        a(href=Link.url(slice.primary.link, ctx.linkResolver))
+          != Txt.asText(slice.primary.link_label)
+
+  .highlight-right
+    img(src=slice.primary.featured_image.url)

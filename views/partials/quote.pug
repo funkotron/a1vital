@@ -1,0 +1,7 @@
+.row.justify-content-center.mb-4
+  .col-lg-9
+    blockquote.blockquote.text-center
+      p.mb-2.font-tertiary.font-italic
+        != Txt.asText(slice.primary.quote_text)
+      footer.blockquote-footer
+        != Txt.asText(slice.primary.quote_source)

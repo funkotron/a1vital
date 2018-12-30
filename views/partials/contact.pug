@@ -1,0 +1,36 @@
+section.section.bg-light-5.py-0
+  .container
+    .row
+      .col-lg-6.appear-animation(data-appear-animation='fadeInUpShorter' data-appear-animation-delay='200')
+        // Go to the bottom of the page to change settings and map location.
+        #googlemaps.google-map.google-map-burst-height.min-height-370
+      .col-lg-6.py-5.appear-animation(data-appear-animation='fadeInRightShorter' data-appear-animation-delay='600')
+        .p-4
+          .row
+            .col
+              span.top-sub-title.text-color-primary QUICK CONTACT
+              h2.text-color-dark.font-weight-bold.mb-4 Send us a message
+          .row
+            .col
+              form.contact-form(action='php/contact-form-recaptcha.php' method='POST')
+                .contact-form-success.alert.alert-success.d-none
+                  strong Success!
+                  |  Your message has been sent to us.
+                .contact-form-error.alert.alert-danger.d-none
+                  strong Error!
+                  |  There was an error sending your message.
+                  span.mail-error-message.d-block
+                .form-row
+                  .form-group.col-md-6
+                    input#name.form-control(type='text' value='' data-msg-required='Please enter your name.' maxlength='100' name='name' placeholder='Name' required='')
+                  .form-group.col-md-6
+                    input#email.form-control(type='email' value='' data-msg-required='Please enter your email address.' data-msg-email='Please enter a valid email address.' maxlength='100' name='email' placeholder='E-mail' required='')
+                .form-row
+                  .form-group.col
+                    textarea#message.form-control(maxlength='5000' data-msg-required='Please enter your message.' rows='5' name='message' placeholder='Message' required='')
+                .form-row.mt-2
+                  .form-group.col
+                    .g-recaptcha(data-sitekey='YOUR_RECAPTCHA_SITE_KEY')
+                .form-row.mt-2
+                  .form-group.col
+                    input.btn.btn-primary.btn-rounded.btn-4.font-weight-semibold.text-0(type='submit' value='SEND MESSAGE' data-loading-text='Loading...')

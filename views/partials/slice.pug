@@ -1,0 +1,15 @@
+//- Display the slices
+for slice in pageContent.data.page_content
+  case slice.slice_type
+    when 'text_section'
+      include ./text-section.pug
+    when 'quote'
+      include ./quote.pug
+    when 'full_width_image'
+      include ./full-width-image.pug
+    when 'image_gallery'
+      include ./image-gallery.pug
+    when 'image_highlight'
+      include ./image-highlight.pug
+    when 'html'
+      include ./html.pug

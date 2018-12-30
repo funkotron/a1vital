@@ -1,0 +1,347 @@
+doctype html
+
+// SEO attrs
+// - var metaTitle = pageContent.getText(pageContent.type + ".meta-title")
+// - var metaDescription = pageContent.getText(pageContent.type + ".meta-description")
+// - var canonicalLink = pageContent.getLink(pageContent.type + ".canonical")
+
+// - var metaTitle = document.data.meta_title
+// - var metaDescription = document.data.meta_description
+// - var canonicalLink = PrismicDOM.Link.url(document.data.canonical, ctx.linkResolver)
+
+
+head
+  // Basic
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+
+  title !{ metaTitle }
+  meta(name='keywords' content='HTML5 Template')
+  meta(name='description' content=metaDescription)
+  meta(name='author' content='a1hypnosis.com')
+  // Mobile Metas
+  meta(name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no')
+  // Web Fonts
+  //- link(href='https://fonts.googleapis.com/css?family=Lato:100,300,400,500,600,700,900%7COpen+Sans:300,400,600,700,800' rel='stylesheet' type='text/css')
+  link(href="https://fonts.googleapis.com/css?family=Quicksand:700|Verdana" rel="stylesheet")
+  //- link(href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Yatra+One" rel="stylesheet")
+  // Vendor CSS
+  link(rel='stylesheet' href='vendor/bootstrap/css/bootstrap.min.css')
+  link(rel='stylesheet' href='vendor/font-awesome/css/fontawesome-all.min.css')
+  link(rel='stylesheet' href='vendor/animate/animate.min.css')
+  link(rel='stylesheet' href='vendor/linear-icons/css/linear-icons.min.css')
+  link(rel='stylesheet' href='vendor/owl.carousel/assets/owl.carousel.min.css')
+  link(rel='stylesheet' href='vendor/owl.carousel/assets/owl.theme.default.min.css')
+  link(rel='stylesheet' href='vendor/magnific-popup/magnific-popup.min.css')
+  // Theme CSS
+  link(rel='stylesheet' href='css/theme.css')
+  link(rel='stylesheet' href='css/theme-elements.css')
+  // Current Page CSS
+  link(rel='stylesheet' href='vendor/rs-plugin/css/settings.css')
+  link(rel='stylesheet' href='vendor/rs-plugin/css/layers.css')
+  link(rel='stylesheet' href='vendor/rs-plugin/css/navigation.css')
+  // Skin CSS
+  link(rel='stylesheet' href='css/skins/default.css')
+  // Theme Custom CSS
+  link(rel='stylesheet' href='css/custom.css')
+  // Head Libs
+  script(src='vendor/modernizr/modernizr.min.js')
+  link(rel='stylesheet' href='vendor/photoswipe/photoswipe.css')
+  link(rel='stylesheet' href='vendor/photoswipe/default-skin/default-skin.css')
+  link(rel='stylesheet' href='vendor/slick/slick.css')
+  link(rel='stylesheet' href='vendor/slick/slick-theme.css')
+
+  // Required for Previews and Experiments
+  script(src="//code.jquery.com/jquery-2.1.1.min.js")
+  script
+    = ctx?"window.prismic = { endpoint: '" + ctx.endpoint + "' };":""
+  script(src="//static.cdn.prismic.io/prismic.min.js")
+
+body.homepage(data-wio-id=pageContent.id)
+  .body
+    include ./partials/menu.pug
+    block body
+    include ./partials/footer.pug
+ 
+// Vendor
+script(src='vendor/jquery/jquery.min.js')
+script(src='vendor/jquery.appear/jquery.appear.min.js')
+script(src='vendor/jquery.easing/jquery.easing.min.js')
+script(src='vendor/jquery-cookie/jquery-cookie.min.js')
+script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='vendor/common/common.min.js')
+script(src='vendor/jquery.validation/jquery.validation.min.js')
+script(src='vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js')
+script(src='vendor/jquery.gmap/jquery.gmap.min.js')
+script(src='vendor/jquery.lazyload/jquery.lazyload.min.js')
+script(src='vendor/isotope/jquery.isotope.min.js')
+
+
+script(src='vendor/photoswipe/photoswipe.min.js')
+script(src='vendor/photoswipe/photoswipe-ui-default.min.js')
+
+
+script(src='vendor/vide/vide.min.js')
+script(src='vendor/vivus/vivus.min.js')
+// Theme Base, Components and Settings
+script(src='js/theme.js')
+// Current Page Vendor and Views
+script(src='vendor/rs-plugin/js/jquery.themepunch.tools.min.js')
+script(src='vendor/rs-plugin/js/jquery.themepunch.revolution.min.js')
+// Theme Custom
+script(src='js/custom.js')
+// Theme Initialization Files
+script(src='js/theme.init.js')
+
+script(src="vendor/slick/slick.min.js")
+
+
+
+script.
+    var initPhotoSwipeFromDOM = function(galleryElements) {
+    var parseThumbnailElements = function(el) {
+      var thumbElements = el.childNodes;
+      var numNodes = thumbElements.length;
+      var items = [];
+      var figureEl;
+      var linkEl;
+      var size;
+      var item;
+
+      for (var i = 0; i < numNodes; i++) {
+        figureEl = thumbElements[i]; // <figure> element
+
+        // include only element nodes
+        if (figureEl.nodeType !== 1) {
+          continue;
+        }
+
+        linkEl = figureEl.children[0]; // <a> element
+
+        width = linkEl.getAttribute("data-width");
+        height = linkEl.getAttribute("data-height");
+
+        // create slide object
+        item = {
+          src: linkEl.getAttribute("href"),
+          w: parseInt(width, 10),
+          h: parseInt(height, 10)
+        };
+
+        if (figureEl.children.length > 1) {
+          // <figcaption> content
+          item.title = figureEl.children[1].innerHTML;
+        }
+
+        if (linkEl.children.length > 0) {
+          // <img> thumbnail element, retrieving thumbnail url
+          item.msrc = linkEl.children[0].getAttribute("src");
+        }
+
+        item.el = figureEl; // save link to element for getThumbBoundsFn
+        items.push(item);
+      }
+
+      return items;
+    };
+
+    // find nearest parent element
+    var closest = function closest(el, fn) {
+      return el && (fn(el) ? el : closest(el.parentNode, fn));
+    };
+
+    // triggers when user clicks on thumbnail
+    var onThumbnailsClick = function(e) {
+      e = e || window.event;
+      e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+
+      var eTarget = e.target || e.srcElement;
+
+      // find root element of slide
+      var clickedListItem = closest(eTarget, function(el) {
+        return el.tagName && el.tagName.toUpperCase() === "FIGURE";
+      });
+
+      if (!clickedListItem) {
+        return;
+      }
+
+      // find index of clicked item by looping through all child nodes
+      // alternatively, you may define index via data- attribute
+      var clickedGallery = clickedListItem.parentNode,
+        childNodes = clickedListItem.parentNode.childNodes,
+        numChildNodes = childNodes.length,
+        nodeIndex = 0,
+        index;
+
+      for (var i = 0; i < numChildNodes; i++) {
+        if (childNodes[i].nodeType !== 1) {
+          continue;
+        }
+
+        if (childNodes[i] === clickedListItem) {
+          index = nodeIndex;
+          break;
+        }
+        nodeIndex++;
+      }
+
+      if (index >= 0) {
+        // open PhotoSwipe if valid index found
+        openPhotoSwipe(index, clickedGallery);
+      }
+      return false;
+    };
+
+    // parse picture index and gallery index from URL (#&pid=1&gid=2)
+    var photoswipeParseHash = function() {
+      var hash = window.location.hash.substring(1),
+        params = {};
+
+      if (hash.length < 5) {
+        return params;
+      }
+
+      var vars = hash.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        if (!vars[i]) {
+          continue;
+        }
+        var pair = vars[i].split("=");
+        if (pair.length < 2) {
+          continue;
+        }
+        params[pair[0]] = pair[1];
+      }
+
+      if (params.gid) {
+        params.gid = parseInt(params.gid, 10);
+      }
+
+      return params;
+    };
+
+    var openPhotoSwipe = function(
+      index,
+      galleryElement,
+      disableAnimation,
+      fromURL
+    ) {
+      var pswpElement = document.querySelectorAll(".pswp")[0],
+        gallery,
+        options,
+        items;
+
+      items = parseThumbnailElements(galleryElement);
+
+      // define options (if needed)
+      options = {
+        // define gallery index (for URL)
+        galleryUID: galleryElement.getAttribute("data-pswp-uid"),
+
+        getThumbBoundsFn: function(index) {
+          // See Options -> getThumbBoundsFn section of documentation for more info
+          var thumbnail = items[index].el.getElementsByTagName("img")[0], // find thumbnail
+            pageYScroll =
+              window.pageYOffset || document.documentElement.scrollTop,
+            rect = thumbnail.getBoundingClientRect();
+
+          return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+        }
+      };
+
+      // PhotoSwipe opened from URL
+      if (fromURL) {
+        if (options.galleryPIDs) {
+          // parse real index when custom PIDs are used
+          // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+          for (var j = 0; j < items.length; j++) {
+            if (items[j].pid == index) {
+              options.index = j;
+              break;
+            }
+          }
+        } else {
+          // in URL indexes start from 1
+          options.index = parseInt(index, 10) - 1;
+        }
+      } else {
+        options.index = parseInt(index, 10);
+      }
+
+      // exit if index not found
+      if (isNaN(options.index)) {
+        return;
+      }
+
+      if (disableAnimation) {
+        options.showAnimationDuration = 0;
+      }
+
+      // Pass data to PhotoSwipe and initialize it
+      gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+      gallery.init();
+    };
+
+    for (var i = 0, l = galleryElements.length; i < l; i++) {
+      galleryElements[i].setAttribute("data-pswp-uid", i + 1);
+      galleryElements[i].onclick = onThumbnailsClick;
+    }
+
+    // Parse URL and open gallery if it contains #&pid=3&gid=1
+    var hashData = photoswipeParseHash();
+    if (hashData.pid && hashData.gid) {
+      openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+    }
+  };
+
+  // execute above function
+  $(".my-gallery").each(function(){
+    initPhotoSwipeFromDOM($(this));
+    $(this).slick({
+      //lazyLoad: 'ondemand',
+      dots: true,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      //fade: true,
+      //cssEase: 'linear',
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        ]
+    });
+  });
+
+//
+  Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-12345678-1', 'auto');
+  ga('send', 'pageview');
+  </script>
