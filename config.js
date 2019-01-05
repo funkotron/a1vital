@@ -5,6 +5,7 @@
 var express = require('express'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
+    compression = require('compression')
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     errorHandler = require('errorhandler'),
