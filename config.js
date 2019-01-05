@@ -20,6 +20,7 @@ module.exports = function() {
   app.set('view engine', 'pug');
   app.use(favicon("public/images/punch.png"));
   app.use(logger('dev'));
+  app.use(express.compress());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(methodOverride());
