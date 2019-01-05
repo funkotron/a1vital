@@ -98,7 +98,9 @@ app.get('/:uid', (req, res, next) => {
  * Homepage route
  */
 app.get('/', (req, res, next) => {
-  req.prismic.api.getByUID('page', 'a1-hypnosis-home')
+  var host = req.get('host');
+  var domain = host.split(".")[1].split("a1")[1];
+  req.prismic.api.getByUID('page', 'a1-'+ domain +'-home')
   .then((pageContent) => {
     if (pageContent) {
       res.render('homepage', { pageContent });
