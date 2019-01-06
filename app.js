@@ -12,6 +12,24 @@ const Cookies = require('cookies');
 const PrismicConfig = require('./prismic-configuration');
 const PORT = app.get('port');
 
+var getDomain = function(req){
+  // Figure out what domain user is on
+  var domain;
+  var host = req.get('host');
+
+  if (host.indexOf("local") != -1) {
+    domain = "hypnosis"
+  }
+  // On herokuapp domain use the 'hypnosis' home page
+  else if (host.indexOf("heroku") != -1){
+    domain="hypnosis"
+  }
+  else {
+    domain = host.split(".")[1].split("a1")[1];
+  }
+  return domain;
+};
+
 app.listen(PORT, () => {
   process.stdout.write(`Point your browser to: http://localhost:${PORT}\n`);
 });
@@ -44,6 +62,9 @@ app.route('*').get((req, res, next) => {
   .then(function(menuContent){
 
     // Define the layout content
+    var domain = getDomain(req);
+    res.locals.domain = domain;
+    res.locals.domainTitle = domain.charAt(0).toUpperCase() + domain.slice(1);
     res.locals.menuContent = menuContent;
     next();
   });
@@ -98,9 +119,11 @@ app.get('/:uid', (req, res, next) => {
  * Homepage route
  */
 app.get('/', (req, res, next) => {
-  var host = req.get('host');
-  var domain = host.split(".")[1].split("a1")[1];
-  req.prismic.api.getByUID('page', 'a1-'+ domain +'-home')
+  var domain = getDomain(req); 
+  // Serve the correct homepage for the domain
+  var homepageUID = 'a1-'+ domain +'-home';
+  console.log(homepageUID);
+  req.prismic.api.getByUID('page', homepageUID)
   .then((pageContent) => {
     if (pageContent) {
       res.render('homepage', { pageContent });
@@ -112,3 +135,5 @@ app.get('/', (req, res, next) => {
     next(`error when retriving page ${error.message}`);
   });
 });
+
+
