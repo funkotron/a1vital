@@ -46,7 +46,7 @@ header#header.header-effect-shrink(data-plugin-options="{'stickyEnabled': true, 
         .header-column.justify-content-start
           .header-logo
             a(href='/')
-              img(alt='EZ' width='48' height='48' src='img/mandala.png')
+              img(alt='A1 #{domainTitle}' width='48' height='48' src='img/mandala.png')
               span A1 #{domainTitle}
         .header-column.justify-content-end
           .header-nav.header-nav-light-dropdown
@@ -64,9 +64,9 @@ header#header.header-effect-shrink(data-plugin-options="{'stickyEnabled': true, 
                             a.dropdown-item(href=Link.url(item.sub_nav_link, ctx.linkResolver))
                               != Txt.asText(item.sub_nav_link_label)
             .header-button.d-none.d-sm-flex.ml-3
-              a.btn.btn-outline.btn-rounded.btn-primary.btn-4.btn-icon-effect-1(href='https://themeforest.net/item/ezy-responsive-multipurpose-html5-template/21814871' target='_blank')
+              a.btn.btn-outline.btn-rounded.btn-primary.btn-4.btn-icon-effect-1(href='/membership' target='_blank')
                 span.wrap
-                  span APPLY NOW
+                  span MEMBERSHIP
                   i.fas.fa-clipboard-check
             button.header-btn-collapse-nav.ml-3.collapsed(data-toggle='collapse' data-target='.header-nav-main nav' aria-expanded='false')
               span.hamburguer
