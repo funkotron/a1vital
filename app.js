@@ -18,14 +18,14 @@ var getDomain = function(req){
   var host = req.get('host');
 
   if (host.indexOf("local") != -1) {
-    domain = "hypnosis"
+    domain = "vital"
   }
   // On herokuapp domain use the 'hypnosis' home page
   else if (host.indexOf("heroku") != -1){
-    domain="hypnosis"
+    domain="vital"
   }
   else {
-    domain = host.split(".")[1].split("a1")[1];
+    domain = host.split("a1")[1];
   }
   return domain;
 };
