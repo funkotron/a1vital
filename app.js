@@ -25,7 +25,7 @@ var getDomain = function(req){
     domain="vital"
   }
   else {
-    domain = host.split("a1")[1];
+    domain = host.split("a1")[1].split(".")[0];
   }
   return domain;
 };
