@@ -31,3 +31,21 @@
 .page-header p.lead {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
+
+/* Links */
+a {
+  color: #0044cc;
+  -webkit-transition: ease color 300ms;
+  transition: ease color 300ms;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: white;
+  background-color: #0044cc;
+  text-decoration: none;
+}
+
+a.link:hover, a.link:focus {
+  text-decoration: underline;
+}
