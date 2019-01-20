@@ -1,14 +1,10 @@
-doctype html
+doctype html(lang='en')
 
 // SEO attrs
-// - var metaTitle = pageContent.getText(pageContent.type + ".meta-title")
-// - var metaDescription = pageContent.getText(pageContent.type + ".meta-description")
-// - var canonicalLink = pageContent.getLink(pageContent.type + ".canonical")
-
-// - var metaTitle = document.data.meta_title
-// - var metaDescription = document.data.meta_description
-// - var canonicalLink = PrismicDOM.Link.url(document.data.canonical, ctx.linkResolver)
-
+- var metaTitle = pageContent.data.meta_title
+- var metaDescription = pageContent.data.meta_description
+- var keywords = pageContent.data.keywords
+// - var canonicalLink = PrismicDOM.Link.url(pageContent.data.canonical, ctx.linkResolver)
 
 head
   // Basic
@@ -16,7 +12,7 @@ head
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
 
   title !{ metaTitle }
-  meta(name='keywords' content='HTML5 Template')
+  meta(name='keywords' content=keywords)
   meta(name='description' content=metaDescription)
   meta(name='author' content='a1hypnosis.com')
   // Mobile Metas
