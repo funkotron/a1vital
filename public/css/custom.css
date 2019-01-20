@@ -32,20 +32,30 @@
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+
 /* Links */
 a {
   color: #0044cc;
   -webkit-transition: ease color 300ms;
   transition: ease color 300ms;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:hover, a:focus {
-  color: white;
-  background-color: #0044cc;
-  text-decoration: none;
+  /*color: white !important;*/
+  /*background-color: #0044cc;*/
+  text-decoration: underline;
 }
 
 a.link:hover, a.link:focus {
   text-decoration: underline;
+}
+
+
+#header a {
+  text-decoration: none;
+}
+#header a:hover, #header a:focus {
+  text-decoration: none;
+  /*color: #0044cc;*/
 }
